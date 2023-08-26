@@ -1,17 +1,20 @@
 const express = require('express');
-const cors = require('cors');
-const dotenv = require('dotenv');
+const path = require('path');
+const bodyParser = require('body-parser');
 require("../src/db/conn");
+const router = require('../src/routers/calculator');
 
 const app = express();
 const port = process.env.PORT || 8000;
 
-// to allow express to handle/use JSON data
-app.use(express.json()); 
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(express.json());
+
+app.use(router)
 
 app.get('/', async (req, res) => {
-    res.send("Hello World!")
+    const homepage = path.join(__dirname, 'index.html');
+    res.sendFile(homepage);
 })
 
 app.listen(port, () => {
