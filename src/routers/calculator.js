@@ -37,15 +37,56 @@ router.get('/history', async (req, res) => {
     try {
         const getHistory = await History.find().sort({ createdAt: -1 }).limit(20)
 
-        const reversedHistory = getHistory.slice().reverse(); 
+        const reversedHistory = getHistory.slice().reverse();
 
         const htmlResponse = `
+            <!DOCTYPE html>
             <html>
-                <head>
-                    <title>History</title>
-                </head>
-                <body>
-                    <h1>Recent 20 calculations History</h1>
+            <head>
+                <title>History</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        margin-top: 30px;
+                        margin-bottom: 30px;
+                        padding: 0;
+                        background-color: #e3e3e3cc;
+                    }
+                    .container {
+                        max-width: 800px;
+                        margin: 0 auto;
+                        padding: 20px;
+                        background-color: #fff;
+                        border: 1px solid #ccc;
+                        border-radius: 5px;
+                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                    }
+                    h1 {
+                        text-align: center;
+                        color: #007bff;
+                        margin-bottom: 20px;
+                    }
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                    }
+                    th, td {
+                        padding: 10px;
+                        text-align: left;
+                        border-bottom: 1px solid #ddd;
+                    }
+                    th {
+                        background-color: #f5f5f5;
+                        font-weight: bold;
+                    }
+                    tr:nth-child(even) {
+                        background-color: #f2f2f2;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <h1>Recent 20 Calculations History</h1>
                     <table>
                         <tr>
                             <th>Question</th>
@@ -60,7 +101,8 @@ router.get('/history', async (req, res) => {
                             </tr>
                         `).join('')}
                     </table>
-                </body>
+                </div>
+            </body>
             </html>
         `;
 
@@ -76,31 +118,73 @@ router.get('/history/all', async (req, res) => {
     try {
         const getHistory = await History.find().sort({ createdAt: -1 })
 
-        const reversedHistory = getHistory.slice().reverse(); 
+        const reversedHistory = getHistory.slice().reverse();
 
         const htmlResponse = `
-            <html>
-                <head>
-                    <title>History</title>
-                </head>
-                <body>
-                    <h1>All calculations History</h1>
-                    <table>
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>History</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    margin-top: 30px;
+                    margin-bottom: 30px;
+                    padding: 0;
+                    background-color: #e3e3e3cc;
+                }
+                .container {
+                    max-width: 800px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    background-color: #fff;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                }
+                h1 {
+                    text-align: center;
+                    color: #007bff;
+                    margin-bottom: 20px;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+                th, td {
+                    padding: 10px;
+                    text-align: left;
+                    border-bottom: 1px solid #ddd;
+                }
+                th {
+                    background-color: #f5f5f5;
+                    font-weight: bold;
+                }
+                tr:nth-child(even) {
+                    background-color: #f2f2f2;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <h1>All Calculations History</h1>
+                <table>
+                    <tr>
+                        <th>Question</th>
+                        <th>Answer</th>
+                        <th>Done At</th>
+                    </tr>
+                    ${reversedHistory.map(item => `
                         <tr>
-                            <th>Question</th>
-                            <th>Answer</th>
-                            <th>Done At</th>
+                            <td>${item.question}</td>
+                            <td>${item.answer}</td>
+                            <td>${item.createdAt.toLocaleString()}</td>
                         </tr>
-                        ${reversedHistory.map(item => `
-                            <tr>
-                                <td>${item.question}</td>
-                                <td>${item.answer}</td>
-                                <td>${item.createdAt.toLocaleString()}</td>
-                            </tr>
-                        `).join('')}
-                    </table>
-                </body>
-            </html>
+                    `).join('')}
+                </table>
+            </div>
+        </body>
+        </html>
         `;
 
         res.send(htmlResponse);
