@@ -6,15 +6,19 @@ const History = require('../models/history');
 router.get('/calculate/:expression(*)', async (req, res) => {
     const expression = req.params.expression;
 
+    // remove all slashes
+    const removeSlashes = expression.replace(/\//g, '')
+
     // replace mathematical words to symbols
-    const mathematicalExpression = expression.replace(/plus/g, '+').replace(/minus/g, '-').replace(/into/g, '*').replace(/\//g, '');
+    const mathematicalExpression = removeSlashes.replace(/plus/g, '+').replace(/minus/g, '-').replace(/into/g, '*').replace(/divide/g, '/').replace(/modulos/g, '%');
 
     try {
         const answer = eval(mathematicalExpression);
+        const roundedAnswer = parseFloat(answer.toFixed(2));
 
         const operation = {
             question: mathematicalExpression,
-            answer: answer
+            answer: roundedAnswer
         };
 
         // adding calculations history to database
@@ -41,7 +45,7 @@ router.get('/history', async (req, res) => {
                     <title>History</title>
                 </head>
                 <body>
-                    <h1>History</h1>
+                    <h1>Recent 20 calculations History</h1>
                     <table>
                         <tr>
                             <th>Question</th>
@@ -52,7 +56,7 @@ router.get('/history', async (req, res) => {
                             <tr>
                                 <td>${item.question}</td>
                                 <td>${item.answer}</td>
-                                <td>${item.createdAt}</td>
+                                <td>${item.createdAt.toLocaleString()}</td>
                             </tr>
                         `).join('')}
                     </table>
@@ -80,7 +84,7 @@ router.get('/history/all', async (req, res) => {
                     <title>History</title>
                 </head>
                 <body>
-                    <h1>History</h1>
+                    <h1>All calculations History</h1>
                     <table>
                         <tr>
                             <th>Question</th>
@@ -91,7 +95,7 @@ router.get('/history/all', async (req, res) => {
                             <tr>
                                 <td>${item.question}</td>
                                 <td>${item.answer}</td>
-                                <td>${item.createdAt}</td>
+                                <td>${item.createdAt.toLocaleString()}</td>
                             </tr>
                         `).join('')}
                     </table>

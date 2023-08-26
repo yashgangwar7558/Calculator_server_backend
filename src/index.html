@@ -1,16 +1,117 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Home Page for server</title>
-    <style>
-        .body h2{
-            color: blue;
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>Endpoint Examples</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin-top: 20px;
+          padding: 0;
+          background-color: #e3e3e3cc;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
-    </style>
-</head>
-<body>
-    <div class="body">
-        <h2>Examples to use this server!</h2>
-    </div>
-</body>
+        .container {
+          max-width: 800px;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: #fff;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+          font-family: fantasy;
+          font-size: 2.8rem;
+          letter-spacing: 3px;
+          margin-top: auto;
+          text-align: center;
+        }
+        p {
+          font-size: 16px;
+          color: #555;
+          margin-bottom: 20px;
+        }
+        h3 {
+          font-size: 22px;
+          color: #333;
+          margin-top: 20px;
+        }
+        ul {
+          list-style-type: none;
+          padding: 0;
+        }
+        li {
+          margin-bottom: 20px;
+        }
+        a {
+          color: #007bff;
+          text-decoration: none;
+          font-weight: bold;
+        }
+        a:hover {
+          text-decoration: underline;
+        }
+        .endpoint-desc {
+          font-size: 14px;
+          color: #555;
+          margin-top: 5px;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h1>Calculator Server</h1>
+        <p>
+          This server responds to mathematical operations sent via URL. It also
+          maintains a history of the last 20 as well as ALL the operations
+          performed on the server.
+        </p>
+        <h3>Click & Try them out!</h3>
+        <ul>
+          <li>
+            <a href="http://localhost:8000/history">GET /history</a>
+            <p class="endpoint-desc">Retrieve history of 20 recent operations.</p>
+          </li>
+          <li>
+            <a href="http://localhost:8000/history/all">GET /history/all</a>
+            <p class="endpoint-desc">Retrieve history of all operations.</p>
+          </li>
+          <li>
+            <a href="http://localhost:8000/calculate/20/plus/3">
+              GET /calculate/20/plus/3
+            </a>
+            <p class="endpoint-desc">Perform addition: 20 + 3.</p>
+          </li>
+          <li>
+            <a href="http://localhost:8000/calculate/10/minus/5/plus/20">
+              GET /calculate/10/minus/5/plus/20
+            </a>
+            <p class="endpoint-desc">Perform multiple operations: 10 - 5 + 20.</p>
+          </li>
+          <li>
+            <a href="http://localhost:8000/calculate/10/divide/5">
+              GET /calculate/10/divide/5
+            </a>
+            <p class="endpoint-desc">Perform division: 10 / 2.</p>
+          </li>
+          <li>
+            <a href="http://localhost:8000/calculate/10/modulos/3">
+              GET /calculate/10/modulos/3
+            </a>
+            <p class="endpoint-desc">Perform modulos: 10 % 3.</p>
+          </li>
+          <li>
+            <a href="http://localhost:8000/calculate/10/minus/5/plus/10/into/4/divide/10">
+              GET /calculate/10/minus/5/plus/10/into/4/divide/10
+            </a>
+            <p class="endpoint-desc">Go as long as you want...</p>
+          </li>
+        </ul>
+      </div>
+    </body>
+  </html>
 </html>
