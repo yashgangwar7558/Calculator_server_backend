@@ -1,8 +1,9 @@
 const express = require('express');
 const router = new express.Router();
+const History = require('../models/history');
 
 // to GET the result and store it in database
-router.get('calculate/:expression(*)', (req, res) => {
+router.get('/calculate/:expression(*)', (req, res) => {
     const expression = req.params.expression;
 
     // replace mathematical words to symbols
@@ -16,7 +17,11 @@ router.get('calculate/:expression(*)', (req, res) => {
             answer: answer
         };
 
-        res.json(operation);
+        // adding calculations history to database
+        const addingCalculation = new History(operation);
+        const result = addingCalculation.save();
+
+        res.status(201).json(operation);
     } catch (error) {
         res.status(400).json({ error: 'Invalid expression' });
     }
