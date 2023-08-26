@@ -124,7 +124,7 @@ router.get('/history/all', async (req, res) => {
         <!DOCTYPE html>
         <html>
         <head>
-            <title>History</title>
+            <title>All History</title>
             <style>
                 body {
                     font-family: Arial, sans-serif;
