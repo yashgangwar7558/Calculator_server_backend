@@ -20,4 +20,4 @@ if (!CONNECTION_URL) {
     }).catch((err) => {
         console.log("Connection failed to the database!!");
     });
-}
+}   

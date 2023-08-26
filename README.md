@@ -18,7 +18,7 @@ This server responds to mathematical operations sent via URL. It also maintains 
 4. Run the server using `npm run start`.
 5. Server setup is ready. Try out the examples.
 
-## Click & Try Them Out!
+## Try some endpoints
 
 - [GET /history](http://localhost:8000/history)
   - Retrieve history of 20 recent operations.
@@ -41,5 +41,6 @@ This server responds to mathematical operations sent via URL. It also maintains 
 - [GET /calculate/10/minus/5/plus/10/into/4/divide/10](http://localhost:8000/calculate/10/minus/5/plus/10/into/4/divide/10)
   - Go as long as you want...
 
+---
 
 ### Isn't that cool! You can use this server to build out some cool calculator stuff.
