@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 dotenv.config({ path: '../../.env' });
 
-const CONNECTION_URL = process.env.MONGODB_CONNECTION_URL || "mongodb+srv://yashgangwar:Yash12345@cluster0.vo961.mongodb.net/calculator?retryWrites=true&w=majority";
+const CONNECTION_URL = process.env.MONGODB_CONNECTION_URL;
 
 console.log(CONNECTION_URL);
 
